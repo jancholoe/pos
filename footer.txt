@@ -1,0 +1,5 @@
+<footer class="bg-light py-5">
+            <div class="container"><div class="small text-center text-muted">Copyright © <?= date("Y") ?> - <?= $_SESSION['setting_name'] ?> | <a href="mailto:oretnom23@mail.com" target="_blank">oretnom23@gmail.com</a></div></div>
+        </footer>
+        
+       <?php include('footer.php') ?>
