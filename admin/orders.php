@@ -5,41 +5,28 @@
 				<table class="table table-bordered">
 					<thead>
 						<tr>
-
 							<th>#</th>
-							<th>Name</th>
-							<th>Address</th>
-							<th>Email</th>
-							<th>Mobile</th>
-							<th>Status</th>
-							<th></th>
+							<th>User ID</th>
+							<th>Description</th>
+							<th>Timestamp</th>
+							<th>Actions</th>
 						</tr>
 					</thead>
 					<tbody>
 						<?php
 						$i = 1;
-						include 'db_connect.php';
-						$qry = $conn->query("SELECT * FROM orders");
+						include 'db_connect.php'; // Ensure this points to the correct database connection script
+						$qry = $conn->query("SELECT * FROM system_logs ORDER BY log_timestamp DESC");
 						while ($row = $qry->fetch_assoc()) :
 						?>
 							<tr>
 								<td><?php echo $i++ ?></td>
-								<td><?php echo $row['name'] ?></td>
-								<td><?php echo $row['address'] ?></td>
-								<td><?php echo $row['email'] ?></td>
-								<td><?php echo $row['mobile'] ?></td>
-								<?php if ($row['status'] == 1) : ?>
-									<td class="text-center"><span class="badge badge-success">Confirmed</span></td>
-									<td>
-										<button class="btn btn-sm btn-primary view_order" data-id="<?php echo $row['id'] ?>">View Order</button>
-										<button class="btn btn-sm btn-info print_receipt" data-id="<?php echo $row['id'] ?>">Print Receipt</button>
-									</td>
-								<?php else : ?>
-									<td class="text-center"><span class="badge badge-secondary">For Verification</span></td>
-									<td>
-										<button class="btn btn-sm btn-primary view_order" data-id="<?php echo $row['id'] ?>">View Order</button>
-									</td>
-								<?php endif; ?>
+								<td><?php echo $row['user_id'] ?></td>
+								<td><?php echo htmlspecialchars($row['description']); ?></td>
+								<td><?php echo $row['log_timestamp'] ?></td>
+								<td>
+									<button class="btn btn-sm btn-primary view_log" data-id="<?php echo $row['log_id'] ?>">View Details</button>
+								</td>
 							</tr>
 						<?php endwhile; ?>
 					</tbody>
@@ -56,11 +43,11 @@
 		var printWindow = window.open('print_receipt.php?id=' + orderId, 'Print', 'left=200, top=200, width=400, height=600, toolbar=0, resizable=0');
 
 		printWindow.onload = function() {
-			setTimeout(function() { 
+			setTimeout(function() {
 				printWindow.print();
 				setTimeout(function() {
 					printWindow.close();
-				}, 100); 
+				}, 100);
 			}, 500);
 		};
 	});
