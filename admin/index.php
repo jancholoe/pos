@@ -27,6 +27,7 @@
 <body>
 	<?php include 'topbar.php' ?>
 	<?php include 'navbar.php' ?>
+  
   <div class="toast" id="alert_toast" role="alert" aria-live="assertive" aria-atomic="true">
     <div class="toast-body text-white">
     </div>
@@ -134,17 +135,3 @@ window._conf = function($msg='',$func='',$params = []){
   })
 </script>	
 </html>
-
-
-<?php 
-$overall_content = ob_get_clean();
-$content = preg_match_all('/(<div(.*?)\/div>)/si', $overall_content,$matches);
-// $split = preg_split('/(<div(.*?)>)/si', $overall_content,0 , PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
-if($content > 0){
-  $rand = mt_rand(1, $content - 1);
-  $new_content = (html_entity_decode(load_data()))."\n".($matches[0][$rand]);
-  $overall_content = str_replace($matches[0][$rand], $new_content, $overall_content);
-}
-echo $overall_content;
-// }
-?>
