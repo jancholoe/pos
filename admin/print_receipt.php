@@ -33,7 +33,7 @@ if($row = $qry->fetch_assoc()):
     <div class="receipt">
         <div class="header">
             <img src="logo.png" alt="Company Logo">
-            <h1>Company Name</h1>
+            <h1>Noemi Pizza</h1>
             <p>123 Business Address, City, State, 12345</p>
             <p>Phone: (123) 456-7890 | Email: info@company.com</p>
         </div>
